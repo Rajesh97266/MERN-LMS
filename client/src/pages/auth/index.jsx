@@ -11,12 +11,14 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { ModeToggle } from "@/components/theme/mode-toggle";
+
 
 function AuthPage() {
   const [activeTab, setActiveTab] = useState("signin");
   return (
     <div className="flex flex-col min-h-screen">
-      <header className="flex items-center border-b px-4 lg:px-6 h-14 bg-white shadow-sm">
+      <header className="flex items-center justify-between border-b px-4 lg:px-6 h-14 bg-white shadow-sm dark:bg-zinc-900">
         <Link
           to={"/"}
           className="flex items-center justify-center hover:text-[#747bff] transition-all"
@@ -24,6 +26,7 @@ function AuthPage() {
           <GraduationCap className="h-8 w-8 mr-4" />
           <span className="font-extrabold text-xl">LMS Learn</span>
         </Link>
+        <ModeToggle />
       </header>
       <div className="flex flex-1 items-center justify-center  bg-background">
         <Tabs
