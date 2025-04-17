@@ -1,6 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { GraduationCap } from "lucide-react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Card,
@@ -13,10 +13,38 @@ import {
 import { ModeToggle } from "@/components/theme/mode-toggle";
 import { signInFormControls, signUpFormControls } from "@/config";
 import CommonForm from "@/components/common-form";
-
+import { AuthContext } from "@/context/auth-context";
 
 function AuthPage() {
   const [activeTab, setActiveTab] = useState("signin");
+  const {
+    signInFormData,
+    setSignInFormData,
+    signUpFormData,
+    setSignUpFormData,
+  } = useContext(AuthContext);
+
+function checkIfSignInFormIsValid() {
+  return (
+    signInFormData &&
+    signInFormData.userEmail !== "" &&
+    signInFormData.password !== ""
+  );
+}
+
+function checkIfSignUpFormIsValid() {
+  return (
+    signUpFormData &&
+    signUpFormData.userName !== "" &&
+    signUpFormData.userEmail !== "" &&
+    signUpFormData.password !== ""
+  );
+}
+
+  console.log(signInFormData);
+  console.log(signUpFormData);
+  
+
   return (
     <div className="flex flex-col min-h-screen">
       <header className="flex items-center justify-between border-b px-4 lg:px-6 h-14 bg-white shadow-sm dark:bg-zinc-900">
@@ -53,6 +81,9 @@ function AuthPage() {
                 <CommonForm
                   formControls={signUpFormControls}
                   buttonText={"Sign Up"}
+                  formData={signUpFormData}
+                  setFormData={setSignUpFormData}
+                  isButtonDisabled={!checkIfSignUpFormIsValid()}
                 />
               </CardContent>
             </Card>
@@ -69,6 +100,9 @@ function AuthPage() {
                 <CommonForm
                   formControls={signInFormControls}
                   buttonText={"Sign In"}
+                  formData={signInFormData}
+                  setFormData={setSignInFormData}
+                  isButtonDisabled={!checkIfSignInFormIsValid()}
                 />
               </CardContent>
             </Card>

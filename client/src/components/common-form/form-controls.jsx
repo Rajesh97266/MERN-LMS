@@ -10,8 +10,9 @@ import {
 } from "../ui/select";
 
 function FormControls({ formControls = [], formData, setFormData }) {
-  let element = null;
   const renderComponentByType = (getControlItem) => {
+    let element = null;
+    const currentControlItemValue = formData[getControlItem.name] || "";
     switch (getControlItem.componentType) {
       case "input":
         element = (
@@ -20,12 +21,27 @@ function FormControls({ formControls = [], formData, setFormData }) {
             name={getControlItem.name}
             placeholder={getControlItem.placeholder}
             type={getControlItem.type}
+            value={currentControlItemValue}
+            onChange={(e) =>
+              setFormData((prev) => ({
+                ...prev,
+                [getControlItem.name]: e.target.value,
+              }))
+            }
           />
         );
         break;
       case "select":
         element = (
-          <Select>
+          <Select
+            value={currentControlItemValue}
+            onValueChange={(value) =>
+              setFormData({
+                ...formData,
+                [getControlItem.name]: value,
+              })
+            }
+          >
             <SelectTrigger className="w-full">
               <SelectValue placeholder={getControlItem.label} />
             </SelectTrigger>
@@ -56,14 +72,13 @@ function FormControls({ formControls = [], formData, setFormData }) {
             <Checkbox
               id={getControlItem.name}
               name={getControlItem.name}
-
-              //   checked={formData[getControlItem.name] || false}
-              //   onCheckedChange={(checked) =>
-              //     setFormData((prev) => ({
-              //       ...prev,
-              //       [getControlItem.name]: checked,
-              //     }))
-              //   }
+              checked={formData[getControlItem.name] || false}
+              onCheckedChange={(checked) =>
+                setFormData((prev) => ({
+                  ...prev,
+                  [getControlItem.name]: checked,
+                }))
+              }
             />
             <Label htmlFor={getControlItem.name}>{getControlItem.label}</Label>
           </div>
@@ -76,6 +91,13 @@ function FormControls({ formControls = [], formData, setFormData }) {
             name={getControlItem.name}
             placeholder={getControlItem.placeholder}
             type={getControlItem.type}
+            value={currentControlItemValue}
+            onChange={(e) =>
+              setFormData((prev) => ({
+                ...prev,
+                [getControlItem.name]: e.target.value,
+              }))
+            }
           />
         );
         break;
@@ -85,7 +107,7 @@ function FormControls({ formControls = [], formData, setFormData }) {
   return (
     <div className="flex flex-col gap-3">
       {formControls.map((controlItem) => (
-        <div  key={controlItem.name}>
+        <div key={controlItem.name}>
           {controlItem.componentType !== "checkbox" && (
             <Label htmlFor={controlItem.name}>{controlItem.label}</Label>
           )}
