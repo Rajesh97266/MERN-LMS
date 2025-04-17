@@ -21,8 +21,8 @@ export const signUpFormControls = [
     componentType: "input",
   },
   {
-    name: "rememberMe",
-    label: "Remember Me",
+    name: "termsAccepted",
+    label: "I agree to the terms and conditions",
     type: "checkbox",
     componentType: "checkbox",
   },
@@ -44,10 +44,11 @@ export const signInFormControls = [
     componentType: "input",
   },
   {
-    name: "termsAccepted",
-    label: "I agree to the terms and conditions",
+    name: "rememberMe",
+    label: "Remember Me",
     type: "checkbox",
     componentType: "checkbox",
+    
     required: true,
   },
 ];

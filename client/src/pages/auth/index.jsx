@@ -6,12 +6,13 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+
 import { ModeToggle } from "@/components/theme/mode-toggle";
+import { signInFormControls, signUpFormControls } from "@/config";
+import CommonForm from "@/components/common-form";
 
 
 function AuthPage() {
@@ -36,9 +37,26 @@ function AuthPage() {
           onValueChange={(value) => setActiveTab(value)}
         >
           <TabsList className="grid w-full grid-cols-2 gap-2">
-            <TabsTrigger value="signin">Sign In</TabsTrigger>
             <TabsTrigger value="signup">Sign Up</TabsTrigger>
+            <TabsTrigger value="signin">Sign In</TabsTrigger>
           </TabsList>
+
+          <TabsContent value="signup">
+            <Card className="p-6 space-y-4">
+              <CardHeader>
+                <CardTitle>Create a new account</CardTitle>
+                <CardDescription>
+                  Enter your details to get started
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                <CommonForm
+                  formControls={signUpFormControls}
+                  buttonText={"Sign Up"}
+                />
+              </CardContent>
+            </Card>
+          </TabsContent>
           <TabsContent value="signin">
             <Card className="p-6 space-y-4">
               <CardHeader>
@@ -48,37 +66,11 @@ function AuthPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-2">
-                <div className="space-y-1">
-                  <label htmlFor="name">Name</label>
-                </div>
-                <div className="space-y-1">
-                  <label htmlFor="username">Username</label>
-                </div>
+                <CommonForm
+                  formControls={signInFormControls}
+                  buttonText={"Sign In"}
+                />
               </CardContent>
-              <CardFooter>
-                <Button>Save changes</Button>
-              </CardFooter>
-            </Card>
-          </TabsContent>
-          <TabsContent value="signup">
-            <Card className="p-6 space-y-4">
-              <CardHeader>
-                <CardTitle>Sign in to your account</CardTitle>
-                <CardDescription>
-                  Enter your email and password to access your account
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                <div className="space-y-1">
-                  <label htmlFor="name">Name</label>
-                </div>
-                <div className="space-y-1">
-                  <label htmlFor="username">Username</label>
-                </div>
-              </CardContent>
-              <CardFooter>
-                <Button>Save changes</Button>
-              </CardFooter>
             </Card>
           </TabsContent>
         </Tabs>
