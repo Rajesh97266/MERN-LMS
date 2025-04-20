@@ -22,6 +22,7 @@ function FormControls({ formControls = [], formData, setFormData }) {
             placeholder={getControlItem.placeholder}
             type={getControlItem.type}
             value={currentControlItemValue}
+            
             onChange={(e) =>
               setFormData((prev) => ({
                 ...prev,
