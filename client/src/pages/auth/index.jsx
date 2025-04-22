@@ -22,29 +22,29 @@ function AuthPage() {
     setSignInFormData,
     signUpFormData,
     setSignUpFormData,
+    handleRegisterUser,
+    handleLoginUser,
   } = useContext(AuthContext);
 
-function checkIfSignInFormIsValid() {
-  return (
-    signInFormData &&
-    signInFormData.userEmail !== "" &&
-    signInFormData.password !== ""
-  );
-}
+  function checkIfSignInFormIsValid() {
+    return (
+      signInFormData &&
+      signInFormData.userEmail !== "" &&
+      signInFormData.password !== ""
+    );
+  }
 
-function checkIfSignUpFormIsValid() {
-  return (
-    signUpFormData &&
-    signUpFormData.userName !== "" &&
-    signUpFormData.userEmail !== "" &&
-    signUpFormData.password !== "" &&
-    signUpFormData.termsAccepted === true
-  );
-}
+  function checkIfSignUpFormIsValid() {
+    return (
+      signUpFormData &&
+      signUpFormData.userName !== "" &&
+      signUpFormData.userEmail !== "" &&
+      signUpFormData.password !== "" &&
+      signUpFormData.termsAccepted === true
+    );
+  }
 
-  console.log(signInFormData);
-  console.log(signUpFormData);
-  
+ 
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -85,6 +85,7 @@ function checkIfSignUpFormIsValid() {
                   formData={signUpFormData}
                   setFormData={setSignUpFormData}
                   isButtonDisabled={!checkIfSignUpFormIsValid()}
+                  handleSubmit={handleRegisterUser}
                 />
               </CardContent>
             </Card>
@@ -104,6 +105,7 @@ function checkIfSignUpFormIsValid() {
                   formData={signInFormData}
                   setFormData={setSignInFormData}
                   isButtonDisabled={!checkIfSignInFormIsValid()}
+                  handleSubmit={handleLoginUser}
                 />
               </CardContent>
             </Card>

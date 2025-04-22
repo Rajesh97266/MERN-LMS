@@ -2,6 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const authRoutes = require("./routes/auth-routes/index.js");
+
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -29,6 +31,9 @@ mongoose
     process.exit(1); // Exit process on failure
   });
 
+//Routes configuration
+
+app.use("/auth", authRoutes);
 app.use((err, req, res, next) => {
   console.log(err.stack);
   res.status(500).json({
