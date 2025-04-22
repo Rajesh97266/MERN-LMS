@@ -37,7 +37,8 @@ function checkIfSignUpFormIsValid() {
     signUpFormData &&
     signUpFormData.userName !== "" &&
     signUpFormData.userEmail !== "" &&
-    signUpFormData.password !== ""
+    signUpFormData.password !== "" &&
+    signUpFormData.termsAccepted === true
   );
 }
 
@@ -47,9 +48,9 @@ function checkIfSignUpFormIsValid() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <header className="flex items-center justify-between border-b px-4 lg:px-6 h-14 bg-white shadow-sm dark:bg-zinc-900">
+      <header className="flex items-center justify-between border-b px-4 lg:px-6 h-14 bg-white shadow-xl dark:bg-zinc-900">
         <Link
-          to={"/"}
+          to={"/auth"}
           className="flex items-center justify-center hover:text-[#747bff] transition-all"
         >
           <GraduationCap className="h-8 w-8 mr-4" />
